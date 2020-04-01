@@ -14,11 +14,12 @@ class Publisher(models.Model):
 
 
 class Author(models.Model):
-    title = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
 
 
 class Review(models.Model):
-    review = models.CharField(max_length=255)
+    review = models.TextField()
     user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
 
 

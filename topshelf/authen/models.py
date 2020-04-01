@@ -18,3 +18,5 @@ class MyUser(UserBase):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
 
+class Moderator(UserBase):
+    pass
