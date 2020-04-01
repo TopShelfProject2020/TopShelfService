@@ -38,7 +38,6 @@ class Categories(models.Model):
     name = models.CharField(max_length=255)
 
 class BookBase(models.Model):
-    pass
     title = models.CharField(max_length=255,default='title')
     description = models.CharField(max_length=255,default="desc")
     release_date = models.DateTimeField(default=timezone.now())
