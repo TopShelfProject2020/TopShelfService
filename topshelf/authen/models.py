@@ -15,7 +15,7 @@ class MyUserBase(AbstractUser):
 class MyUser(MyUserBase):
     address = models.CharField(max_length=255)
     card_info = models.ForeignKey(Card, on_delete=models.CASCADE)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    orders = models.ForeignKey(Order, on_delete=models.CASCADE)
 
 
 class Moderator(MyUserBase):
