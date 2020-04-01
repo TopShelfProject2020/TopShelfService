@@ -1,20 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import UserManager, AbstractUser
 
+from main.models import Card, Order
+
 
 class MyUserManager(UserManager):
     pass
 
 
-class MyUser(AbstractUser):
-    ROLE_MODERATOR = 0
-    ROLE_WRITER = 1
-    ROLE_READER = 2
+class UserBase(AbstractUser):
+    pass
 
-    ROLE_CHOICES = (
-        (ROLE_MODERATOR, 'moderator'),
-        (ROLE_WRITER, 'writer'),
-        (ROLE_READER, 'reader'),
-    )
+
+class MyUser(UserBase):
+    address = models.CharField(max_length=255)
+    card_info = models.ForeignKey(Card, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
 
