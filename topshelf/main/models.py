@@ -1,6 +1,7 @@
 from django.db import models
 
-from authen.models import MyUser
+# from authen.models import MyUser
+# import authen
 
 
 class Card(models.Model):
@@ -20,7 +21,7 @@ class Author(models.Model):
 
 class Review(models.Model):
     review = models.TextField()
-    user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
+    user = models.ForeignKey('authen.MyUser', on_delete=models.CASCADE)
 
 
 class Genre(models.Model):

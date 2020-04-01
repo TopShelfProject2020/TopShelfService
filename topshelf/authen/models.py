@@ -8,15 +8,15 @@ class MyUserManager(UserManager):
     pass
 
 
-class UserBase(AbstractUser):
+class MyUserBase(AbstractUser):
     pass
 
 
-class MyUser(UserBase):
+class MyUser(MyUserBase):
     address = models.CharField(max_length=255)
     card_info = models.ForeignKey(Card, on_delete=models.CASCADE)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
 
-class Moderator(UserBase):
+class Moderator(MyUserBase):
     pass
