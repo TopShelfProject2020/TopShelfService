@@ -17,15 +17,18 @@ class Publisher(models.Model):
 class Author(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
+    objects = models.Manager
 
 
 class Review(models.Model):
     review = models.TextField()
     user = models.ForeignKey('authen.MyUser', on_delete=models.CASCADE)
+    objects = models.Manager
 
 
 class Genre(models.Model):
     name = models.CharField(max_length=255)
+    objects = models.Manager
 
 
 class Order(models.Model):
@@ -36,6 +39,8 @@ class Order(models.Model):
 
 class Categories(models.Model):
     name = models.CharField(max_length=255)
+    objects = models.Manager
+
 
 class BookBase(models.Model):
     title = models.CharField(max_length=255,default='title')
@@ -49,6 +54,9 @@ class BookBase(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE,null=True)
     category = models.ManyToManyField(Categories)
 
+    class Meta:
+        abstract = True
+
 
 class Book(BookBase):
     FORMAT_CHOICES = [
@@ -58,6 +66,7 @@ class Book(BookBase):
     num_pages = models.SmallIntegerField()
     format = models.CharField(max_length=2, choices=FORMAT_CHOICES)
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
+
 
 class AudioBook(BookBase):
 

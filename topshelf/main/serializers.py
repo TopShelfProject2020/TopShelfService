@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from main.models import *
 
+
 class AudioBookSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
 
@@ -8,12 +9,14 @@ class AudioBookSerializer(serializers.ModelSerializer):
         model = AudioBook
         fields = ('__all__')
 
+
 class PublisherSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Publisher
         fields = ('__all__')
+
 
 class OrderSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
@@ -29,6 +32,7 @@ class CategoriesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Categories
         fields = ('__all__')
+
 
 class BookSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
@@ -67,7 +71,6 @@ class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         fields = ('__all__')
-
 
 
 class CardSerializer(serializers.ModelSerializer):
