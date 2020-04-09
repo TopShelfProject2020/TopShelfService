@@ -66,6 +66,7 @@ class Book(BookBase):
     num_pages = models.SmallIntegerField()
     format = models.CharField(max_length=2, choices=FORMAT_CHOICES)
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
+    objects = models.Manager()
 
 
 class AudioBook(BookBase):
