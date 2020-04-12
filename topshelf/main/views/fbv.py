@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.response import Response
 from rest_framework import status
-from main.models import Genre, Book
+from main.models import Genre, Book,Order
 from rest_framework.decorators import api_view
 from main.serializers import GenreSerializer, ReviewSerializer
 
@@ -47,3 +47,6 @@ def get_delete_book_review(request, pk, pk2):
         review.delete()
         return Response({"status": "Successfully deleted review"}, status=status.HTTP_204_NO_CONTENT)
     return Response({'error': 'bad request'}, status=status.HTTP_404_NOT_FOUND)
+
+
+

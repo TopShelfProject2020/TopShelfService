@@ -1,7 +1,4 @@
 from django.db import models
-from django.utils import timezone
-# from authen.models import MyUser
-# import authen
 
 
 class Card(models.Model):
@@ -45,7 +42,7 @@ class Categories(models.Model):
 class BookBase(models.Model):
     title = models.CharField(max_length=255,default='title')
     description = models.CharField(max_length=255,default="desc")
-    release_date = models.DateTimeField(default=timezone.now())
+    # release_date = models.DateTimeField(default=timezone.now())
     rating = models.IntegerField(default=5)
     price = models.IntegerField(default=100)
     image = models.CharField(max_length=255,default="image")
@@ -70,7 +67,6 @@ class Book(BookBase):
 
 
 class AudioBook(BookBase):
-
     GENDER_CHOICES = [
         ('M','Male'),
         ('F','Female'),
@@ -78,3 +74,4 @@ class AudioBook(BookBase):
 
     duration = models.CharField(max_length=255)
     gender = models.CharField(max_length=2, choices=GENDER_CHOICES)
+    objects = models.Manager()

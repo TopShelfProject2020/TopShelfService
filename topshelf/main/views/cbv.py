@@ -3,8 +3,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from main.models import Book
-from main.serializers import BookSerializer
+from main.models import Book,AudioBook
+from main.serializers import BookSerializer,AudioBookSerializer
 
 
 class BookList(APIView):
@@ -29,5 +29,28 @@ class GenreList(APIView):
             return Book.objects.get(id=pk)
         except Book.DoesNotExist as e:
             raise Http404
+
+
+class CategoriesList(APIView):
+
+    def get_object(self, pk):
+        try:
+            return AudioBook.objects.get(id=pk)
+        except AudioBook.DoesNotExist as e:
+            raise Http404
+
+class AudioList(APIView):
+
+    def get(self):
+        audioLists = AudioBook.objects.all()
+        serialiazer = AudioBookSerializer(audioLists,many=True)
+        return Response(serialiazer.data,status = status.HTTP_200_OK)
+
+    def post(self,request):
+        serializer = AudioBookSerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
