@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     'authen',
     'main',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -175,3 +176,34 @@ JWT_AUTH = {
     'JWT_AUTH_HEADER_PREFIX': 'JWT',
     'JWT_AUTH_COOKIE': None,
 }
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s -- %(asctime)s: %(message)s',
+        },
+        'simple': {
+            'format': '%(levelname)s -- %(message)s'
+        }
+    },
+    'handlers': {
+        'file_handler': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': 'test.log',
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'api': {
+            'handlers': ['file_handler'],
+            'level': 'DEBUG',
+        },
+    },
+}
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
