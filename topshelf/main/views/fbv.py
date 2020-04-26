@@ -48,5 +48,3 @@ def get_delete_book_review(request, pk, pk2):
         return Response({"status": "Successfully deleted review"}, status=status.HTTP_204_NO_CONTENT)
     return Response({'error': 'bad request'}, status=status.HTTP_404_NOT_FOUND)
 
-
-

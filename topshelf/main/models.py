@@ -1,4 +1,13 @@
 from django.db import models
+from datetime import datetime
+
+
+class OrderManager(models.Manager):
+    def for_user(self,user):
+        return self.filter(user=user)
+
+class AudioManager(models.Manager):
+    pass
 
 
 class Card(models.Model):
@@ -33,6 +42,8 @@ class Order(models.Model):
     items = models.CharField(max_length=255,default="item1")
     user = models.ForeignKey('authen.MyUser', on_delete=models.CASCADE,default=1)
 
+    objects = OrderManager()
+
 
 class Categories(models.Model):
     name = models.CharField(max_length=255)
@@ -42,7 +53,7 @@ class Categories(models.Model):
 class BookBase(models.Model):
     title = models.CharField(max_length=255,default='title')
     description = models.CharField(max_length=255,default="desc")
-    # release_date = models.DateTimeField(default=timezone.now())
+    release_date = models.DateTimeField(default=datetime.now())
     rating = models.IntegerField(default=5)
     price = models.IntegerField(default=100)
     image = models.CharField(max_length=255,default="image")
