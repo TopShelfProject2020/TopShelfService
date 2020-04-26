@@ -10,6 +10,8 @@ urlpatterns = [
 
     path('bookList/', BookListAPIView.as_view()),  # GET POST book
 
+    path('authorList/', BookListAPIView.as_view()),  # GET POST book
+
     path('genreList/', GenreListApiView.as_view()),  # GET POST genre
 ]
 

@@ -4,14 +4,24 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from main.models import Book,AudioBook
-from main.serializers import BookSerializer,AudioBookSerializer
+from main.models import Book, AudioBook, Author
+from main.serializers import BookSerializer, AudioBookSerializer, AuthorSerializer
 
 
 class BookListAPIView(mixins.ListModelMixin, generics.GenericAPIView):
     http_method_names = ['GET']
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    permission_classes = (AllowAny,)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+
+class AuthorListAPIView(mixins.ListModelMixin, generics.GenericAPIView):
+    http_method_names = ['GET']
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
     permission_classes = (AllowAny,)
 
     def get(self, request, *args, **kwargs):

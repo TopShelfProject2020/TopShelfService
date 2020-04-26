@@ -6,6 +6,7 @@ class OrderManager(models.Manager):
     def for_user(self,user):
         return self.filter(user=user)
 
+
 class AudioManager(models.Manager):
     pass
 
@@ -20,10 +21,17 @@ class Publisher(models.Model):
     title = models.CharField(max_length=255)
 
 
+class TopRatedAuthorsManager(models.Manager):
+    def get_query_set(self):
+        return self.get_queryset.order_by('-rating')
+
+
 class Author(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
+    rating = models.FloatField()
     objects = models.Manager
+    topRated = TopRatedAuthorsManager()
 
 
 class Review(models.Model):
@@ -66,6 +74,11 @@ class BookBase(models.Model):
         abstract = True
 
 
+class NewBooksManager(models.Manager):
+    def get_query_set(self):
+        return self.get_queryset().order_by('-release_date')
+
+
 class Book(BookBase):
     FORMAT_CHOICES = [
         ('HC', 'Hard Cover'),
@@ -75,6 +88,7 @@ class Book(BookBase):
     format = models.CharField(max_length=2, choices=FORMAT_CHOICES)
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     objects = models.Manager()
+    new = NewBooksManager()
 
 
 class AudioBook(BookBase):
