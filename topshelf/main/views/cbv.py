@@ -38,14 +38,13 @@ class GenreListApiView(mixins.ListModelMixin, generics.GenericAPIView):
         return self.list(request, *args, **kwargs)
 
 
-class CategoriesList(APIView):
+class CategoriesList(mixins.ListModelMixin, generics.GenericAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    permission_classes = (AllowAny,)
 
-    def get_object(self, pk):
-        try:
-            return AudioBook.objects.get(id=pk)
-        except AudioBook.DoesNotExist as e:
-            raise Http404
-
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
 
 class AudioList(APIView):
 

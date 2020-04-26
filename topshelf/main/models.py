@@ -12,6 +12,10 @@ class OrderManager(models.Manager):
 class AudioManager(models.Manager):
     pass
 
+class PublisherManager(models.Manager):
+    def order_by_name(self):
+        return self.get_queryset.order_by('name')
+
 
 class Card(models.Model):
     number = models.PositiveIntegerField()

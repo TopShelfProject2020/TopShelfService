@@ -2,7 +2,7 @@ from django.urls import path
 from rest_framework.routers import DefaultRouter
 
 from main.views import viewsets
-from main.views.cbv import BookListAPIView, GenreListApiView, AuthorListAPIView
+from main.views.cbv import BookListAPIView, GenreListApiView, AuthorListAPIView,CategoriesList
 from main.views.fbv import show_add_book_reviews
 
 urlpatterns = [
@@ -15,7 +15,7 @@ urlpatterns = [
 
     path('genreList/', GenreListApiView.as_view()),  # GET POST genre
 
-
+    path('categories/', CategoriesList.as_view()),  # GET category
 
 ]
 
@@ -23,6 +23,8 @@ router = DefaultRouter()
 router.register(r'books', viewsets.BookViewSet, basename='books')
 router.register(r'genres', viewsets.BookViewSet, basename='genres')
 router.register(r'publisher', viewsets.PublisherViewSet, basename='publisher')
+router.register(r'audio', viewsets.AudioViewSet, basename='audio')
+
 
 
 urlpatterns += router.urls
