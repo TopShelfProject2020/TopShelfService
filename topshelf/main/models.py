@@ -15,6 +15,7 @@ class Card(models.Model):
     number = models.PositiveIntegerField()
     due_date = models.DateField()
     cvv = models.SmallIntegerField()
+    objects = models.Manager()
 
 
 class Publisher(models.Model):
