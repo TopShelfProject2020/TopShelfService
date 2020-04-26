@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     'authen',
     'main',
+    'core',
 ]
 
 MIDDLEWARE = [

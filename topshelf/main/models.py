@@ -43,7 +43,7 @@ class BookBase(models.Model):
     release_date = models.DateTimeField(default=datetime.now)
     rating = models.IntegerField(default=5)  # set validator no more than 10
     price = models.IntegerField(default=100)
-    image = models.CharField(max_length=255, default="image")
+    image = models.ImageField(upload_to='todo', null=True, blank=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
 
     class Meta:
