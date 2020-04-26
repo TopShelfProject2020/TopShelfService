@@ -5,7 +5,8 @@ from main.models import Genre, Book,Order
 from rest_framework.decorators import api_view
 from main.serializers import GenreSerializer, ReviewSerializer
 import json
-
+import logging
+logger = logging.getLogger('api')
 
 @api_view(['GET', 'POST'])
 def show_add_book_reviews(request, pk):
@@ -27,6 +28,7 @@ def show_add_book_reviews(request, pk):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        logger.error('Something went wrong!')
         return Response(serializer.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     return Response({'error': 'bad request'}, status=status.HTTP_404_NOT_FOUND)
 

@@ -4,6 +4,9 @@ from main.serializers import AudioBookSerializer, PublisherSerializer, GenreSeri
 from rest_framework import mixins, viewsets, generics
 from rest_framework.permissions import IsAuthenticated
 
+import logging
+logger = logging.getLogger('api')
+
 
 class AudioViewSet(viewsets.ModelViewSet,
                         mixins.CreateModelMixin,

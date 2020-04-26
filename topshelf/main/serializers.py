@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.validators import UniqueTogetherValidator
 
 from authen.serializers import MyUserSerializer
 from main.models import *
@@ -58,18 +59,34 @@ class GenreSerializer(serializers.Serializer):
 class ReviewSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
     user = MyUserSerializer(read_only=True)
+    review = serializers.CharField()
+
+    def validate_review(self, value):
+        if len(value) < 30:
+            raise serializers.ValidationError('Your review does not meet the requirements.\nAt least 30 characters.')
+        return value
 
     class Meta:
         model = Review
         fields = ('__all__')
 
 
+def under_ten(value):
+    if value > 10:
+        raise serializers.ValidationError('Please, rate 1-10 !')
+
+
 class AuthorSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
+    rating = serializers.FloatField(validators=[under_ten])
 
     class Meta:
         model = Author
         fields = ('__all__')
+        validators = UniqueTogetherValidator(
+            queryset=Author.objects.all(),
+            fields=['first_name', 'last_name']
+        )
 
 
 class CardSerializer(serializers.ModelSerializer):
