@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-
+from authen.serializers import MyUserSerializer
 from main.models import *
 
 
@@ -57,6 +57,7 @@ class GenreSerializer(serializers.Serializer):
 
 class ReviewSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
+    user = MyUserSerializer(read_only=True)
 
     class Meta:
         model = Review

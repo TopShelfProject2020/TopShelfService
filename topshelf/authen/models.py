@@ -6,8 +6,6 @@ from django.utils import timezone
 from django.contrib.auth.models import User, AbstractUser, \
     AbstractBaseUser, PermissionsMixin, UserManager
 
-from main.models import Card
-
 
 class MyUserManager(UserManager):
     pass
@@ -36,9 +34,10 @@ class MyUserBase(AbstractBaseUser, PermissionsMixin):
 
 
 class MyUser(MyUserBase):
-    address = models.CharField(max_length=255)
-    card_info = models.ForeignKey(Card, on_delete=models.CASCADE, null=True, blank=True)
-
+    pass
+    # address = models.CharField(max_length=255)
+    # card_info = models.ForeignKey(Card, on_delete=models.CASCADE, null=True, blank=True)
+    # profile needed
 
 # class Moderator(MyUserBase):
 #     pass

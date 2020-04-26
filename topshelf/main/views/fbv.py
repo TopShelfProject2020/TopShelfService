@@ -19,7 +19,7 @@ def show_add_book_reviews(request, pk):
         return Response({"status": "Reviews of this Book does not exist"}, status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        ser = ReviewSerializer(reviews)
+        ser = ReviewSerializer(reviews, many=True)
         return Response(ser.data, status=status.HTTP_200_OK)
     elif request.method == 'POST':
         data = json.loads(request.body)
