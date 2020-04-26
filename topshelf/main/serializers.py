@@ -34,14 +34,6 @@ class CategoriesSerializer(serializers.ModelSerializer):
         fields = ('__all__')
 
 
-class BookSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(read_only=True)
-
-    class Meta:
-        model = Author
-        fields = ('__all__')
-
-
 class GenreSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(required=True)
@@ -79,3 +71,20 @@ class CardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Card
         fields = ('__all__')
+
+
+class BookSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    review = ReviewSerializer(many=True)
+    genre = GenreSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Author
+        fields = ('__all__')
+
+    def create(self, validated_data):
+        reviews = validated_data.pop('review')
+        book = Book.objects.create(**validated_data)
+        for r in reviews:
+            Review.objects.create(book=book, **r)
+        return book

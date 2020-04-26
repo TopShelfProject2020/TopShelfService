@@ -10,6 +10,7 @@ class MyUserManager(UserManager):
 
 class MyUserBase(AbstractUser):
     pass
+
     # class Meta:
     #     abstract = True
 

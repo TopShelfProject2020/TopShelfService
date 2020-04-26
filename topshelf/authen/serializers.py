@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from authen.models import *
 
+
 class MyUserSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
 
