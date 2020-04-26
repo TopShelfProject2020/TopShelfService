@@ -59,7 +59,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'topshelf.urls'
 
-AUTH_USER_MODEL = 'authen.MyUserBase'
+AUTH_USER_MODEL = 'authen.MyUser'
 
 TEMPLATES = [
     {

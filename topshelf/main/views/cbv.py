@@ -9,7 +9,6 @@ from main.serializers import BookSerializer, AudioBookSerializer, AuthorSerializ
 
 
 class BookListAPIView(mixins.ListModelMixin, generics.GenericAPIView):
-    http_method_names = ['GET']
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = (AllowAny,)
@@ -18,8 +17,7 @@ class BookListAPIView(mixins.ListModelMixin, generics.GenericAPIView):
         return self.list(request, *args, **kwargs)
 
 
-class AuthorListAPIView(mixins.ListModelMixin, generics.GenericAPIView):
-    http_method_names = ['GET']
+class AuthorListAPIView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
     permission_classes = (AllowAny,)
@@ -27,9 +25,11 @@ class AuthorListAPIView(mixins.ListModelMixin, generics.GenericAPIView):
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
 
 class GenreListApiView(mixins.ListModelMixin, generics.GenericAPIView):
-    http_method_names = ['GET']
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = (AllowAny,)

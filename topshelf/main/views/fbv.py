@@ -4,6 +4,7 @@ from rest_framework import status
 from main.models import Genre, Book,Order
 from rest_framework.decorators import api_view
 from main.serializers import GenreSerializer, ReviewSerializer
+import json
 
 
 @api_view(['GET', 'POST'])
@@ -13,15 +14,16 @@ def show_add_book_reviews(request, pk):
     except ObjectDoesNotExist:
         return Response({"status": "Book does not exist"}, status=status.HTTP_404_NOT_FOUND)
     try:
-        reviews = books.reviews.all()
+        reviews = books.review_set.all()
     except ObjectDoesNotExist:
         return Response({"status": "Reviews of this Book does not exist"}, status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = ReviewSerializer(reviews)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        ser = ReviewSerializer(reviews)
+        return Response(ser.data, status=status.HTTP_200_OK)
     elif request.method == 'POST':
-        serializer = ReviewSerializer(data=request.data)
+        data = json.loads(request.body)
+        serializer = ReviewSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

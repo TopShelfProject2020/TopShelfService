@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 class OrderManager(models.Manager):
-    def for_user(self,user):
+    def for_user(self, user):
         return self.filter(user=user)
 
 
@@ -23,7 +23,7 @@ class Publisher(models.Model):
 
 
 class TopRatedAuthorsManager(models.Manager):
-    def get_query_set(self):
+    def get_queryset(self):
         return self.get_queryset.order_by('-rating')
 
 
@@ -37,27 +37,32 @@ class Author(models.Model):
 
 class Order(models.Model):
     status = models.BooleanField(default=True)
-    items = models.CharField(max_length=255,default="item1")
-    user = models.ForeignKey('authen.MyUser', on_delete=models.CASCADE,default=1)
+    items = models.CharField(max_length=255, default="item1")
+    user = models.ForeignKey('authen.MyUser', on_delete=models.CASCADE, default=1)
     objects = OrderManager()
 
 
 class BookBase(models.Model):
-    title = models.CharField(max_length=255,default='title')
-    description = models.CharField(max_length=255,default="desc")
+    title = models.CharField(max_length=255, default='title')
+    description = models.CharField(max_length=255, default="desc")
     release_date = models.DateTimeField(default=datetime.now)
-    rating = models.IntegerField(default=5)
+    rating = models.IntegerField(default=5)  # set validator no more than 10
     price = models.IntegerField(default=100)
-    image = models.CharField(max_length=255,default="image")
-    author = models.ForeignKey(Author, on_delete=models.CASCADE,null=True)
+    image = models.CharField(max_length=255, default="image")
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
 
     class Meta:
         abstract = True
 
 
 class NewBooksManager(models.Manager):
-    def get_query_set(self):
+    def get_queryset(self):
         return self.get_queryset().order_by('-release_date')
+
+
+# class BookReviewManager(models.Manager):
+#     def get_queryset(self):
+#         return self.objects.
 
 
 class Book(BookBase):
@@ -70,6 +75,7 @@ class Book(BookBase):
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     objects = models.Manager()
     new = NewBooksManager()
+    # reviews = BookReviewManager()
 
 
 class Review(models.Model):
@@ -87,8 +93,8 @@ class Genre(models.Model):
 
 class AudioBook(BookBase):
     GENDER_CHOICES = [
-        ('M','Male'),
-        ('F','Female'),
+        ('M', 'Male'),
+        ('F', 'Female'),
     ]
 
     duration = models.CharField(max_length=255)

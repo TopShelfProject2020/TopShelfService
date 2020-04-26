@@ -1,4 +1,6 @@
 from rest_framework import serializers
+
+
 from main.models import *
 
 
@@ -48,6 +50,10 @@ class GenreSerializer(serializers.Serializer):
         instance.save()
         return instance
 
+    class Meta:
+        model = Genre
+        fields = ('__all__')
+
 
 class ReviewSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
@@ -75,16 +81,16 @@ class CardSerializer(serializers.ModelSerializer):
 
 class BookSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
-    review = ReviewSerializer(many=True)
+    review = ReviewSerializer(many=True, required=False)
     genre = GenreSerializer(many=True, read_only=True)
 
     class Meta:
-        model = Author
+        model = Book
         fields = ('__all__')
 
-    def create(self, validated_data):
-        reviews = validated_data.pop('review')
-        book = Book.objects.create(**validated_data)
-        for r in reviews:
-            Review.objects.create(book=book, **r)
-        return book
+    # def create(self, validated_data):
+    #     reviews = validated_data.pop('review')
+    #     book = Book.objects.create(**validated_data)
+    #     for r in reviews:
+    #         Review.objects.create(book=book, **r)
+    #     return book
