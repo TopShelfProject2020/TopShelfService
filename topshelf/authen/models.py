@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User, AbstractUser, \
     AbstractBaseUser, PermissionsMixin, UserManager
 
-from main.models import Card, Order
+from main.models import Card
 
 
 class MyUserManager(UserManager):
@@ -38,7 +38,6 @@ class MyUserBase(AbstractBaseUser, PermissionsMixin):
 class MyUser(MyUserBase):
     address = models.CharField(max_length=255)
     card_info = models.ForeignKey(Card, on_delete=models.CASCADE, null=True, blank=True)
-    orders = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, blank=True)
 
 
 # class Moderator(MyUserBase):

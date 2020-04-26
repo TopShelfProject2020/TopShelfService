@@ -1,6 +1,8 @@
 from django.db import models
 from datetime import datetime
 
+from authen.models import MyUser
+
 
 class OrderManager(models.Manager):
     def for_user(self, user):
@@ -33,13 +35,6 @@ class Author(models.Model):
     rating = models.FloatField()
     objects = models.Manager()
     topRated = TopRatedAuthorsManager()
-
-
-class Order(models.Model):
-    status = models.BooleanField(default=True)
-    items = models.CharField(max_length=255, default="item1")
-    user = models.ForeignKey('authen.MyUser', on_delete=models.CASCADE, default=1)
-    objects = OrderManager()
 
 
 class BookBase(models.Model):
@@ -78,15 +73,22 @@ class Book(BookBase):
     # reviews = BookReviewManager()
 
 
-class Review(models.Model):
-    review = models.TextField()
-    user = models.ForeignKey('authen.MyUser', on_delete=models.CASCADE)
+class Genre(models.Model):
+    name = models.CharField(max_length=255)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     objects = models.Manager()
 
 
-class Genre(models.Model):
-    name = models.CharField(max_length=255)
+class Order(models.Model):
+    status = models.BooleanField(default=True)
+    items = models.CharField(max_length=255, default="item1")
+    user = models.ForeignKey(MyUser, on_delete=models.CASCADE, default=1)
+    objects = OrderManager()
+
+
+class Review(models.Model):
+    review = models.TextField()
+    user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     objects = models.Manager()
 
