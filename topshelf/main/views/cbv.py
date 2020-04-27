@@ -4,7 +4,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from main.models import Book, AudioBook, Author
+from main.models import Book, AudioBook, Author, Genre, Categories
 from main.serializers import BookSerializer, AudioBookSerializer, AuthorSerializer
 
 
@@ -30,7 +30,7 @@ class AuthorListAPIView(mixins.ListModelMixin, mixins.CreateModelMixin, generics
 
 
 class GenreListApiView(mixins.ListModelMixin, generics.GenericAPIView):
-    queryset = Book.objects.all()
+    queryset = Genre.objects.all()
     serializer_class = BookSerializer
     permission_classes = (AllowAny,)
 
@@ -39,12 +39,13 @@ class GenreListApiView(mixins.ListModelMixin, generics.GenericAPIView):
 
 
 class CategoriesList(mixins.ListModelMixin, generics.GenericAPIView):
-    queryset = Book.objects.all()
+    queryset = Categories.objects.all()
     serializer_class = BookSerializer
     permission_classes = (AllowAny,)
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+
 
 class AudioList(APIView):
 

@@ -10,8 +10,3 @@ urlpatterns = [
     path('register/', views.Register.as_view()),
 ]
 
-# router = DefaultRouter()
-# router.register(r'register', views.Register, basename='register')
-#
-#
-# urlpatterns += router.urls
