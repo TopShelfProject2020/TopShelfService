@@ -26,6 +26,7 @@ class Card(models.Model):
 
 class Publisher(models.Model):
     title = models.CharField(max_length=255)
+    objects = PublisherManager()
 
 
 class TopRatedAuthorsManager(models.Manager):
