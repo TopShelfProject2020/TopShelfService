@@ -9,6 +9,9 @@
 ### About Top Shelf
 
 Service for an online book store
+You can see book library, but if you want to make purchase or leave feedback you must register.
+Roles are moderator, reader and author.
+
 
 ### Class Diagram
 
