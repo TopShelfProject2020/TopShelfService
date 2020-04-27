@@ -24,6 +24,8 @@ router.register(r'books', viewsets.BookViewSet, basename='books')
 router.register(r'genres', viewsets.BookViewSet, basename='genres')
 router.register(r'publisher', viewsets.PublisherViewSet, basename='publisher')
 router.register(r'audio', viewsets.AudioViewSet, basename='audio')
+router.register(r'order', viewsets.OrderViewSet, basename='order')
+
 
 
 
