@@ -11,5 +11,5 @@
 
 ### Class Diagram
 
-![Class Diagram](https://www.lucidchart.com/documents/edit/679b4eb6-590e-4ea3-a0a9-4d4f48ec4888/0_0)
+https://www.lucidchart.com/documents/edit/679b4eb6-590e-4ea3-a0a9-4d4f48ec4888/0_0
 
