@@ -8,6 +8,7 @@
 
 ### About Top Shelf
 
+Service for an online book store
 
 ### Class Diagram
 
