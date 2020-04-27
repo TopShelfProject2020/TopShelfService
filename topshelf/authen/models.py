@@ -35,9 +35,6 @@ class MyUserBase(AbstractBaseUser, PermissionsMixin):
 
 class MyUser(MyUserBase):
     pass
-    # address = models.CharField(max_length=255)
-    # card_info = models.ForeignKey(Card, on_delete=models.CASCADE, null=True, blank=True)
-    # profile needed
 
 # class Moderator(MyUserBase):
 #     pass

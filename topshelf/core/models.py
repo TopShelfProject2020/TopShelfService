@@ -9,15 +9,15 @@ from authen.models import MyUser
 class Profile(models.Model):
     MODERATOR = 1
     READER = 2
-    WRITER = 3
+    AUTHOR = 3
     ROLE_CHOICES = (
         (MODERATOR, 'moderator'),
         (READER, 'reader'),
-        (WRITER, 'writer'),
+        (AUTHOR, 'author'),
     )
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
     birthdate = models.DateField(null=True, blank=True)
-    role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, null=True, blank=True)
+    role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, default=2)
     objects = models.Manager()
 
     def __str__(self):  # __unicode__ for Python 2
