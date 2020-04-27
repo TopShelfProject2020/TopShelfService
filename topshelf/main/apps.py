@@ -5,4 +5,4 @@ class MainConfig(AppConfig):
     name = 'main'
 
     def ready(self):
-        import authen.signals
+        import main.signals

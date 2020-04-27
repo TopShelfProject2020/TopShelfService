@@ -4,6 +4,8 @@ from main.serializers import AudioBookSerializer, PublisherSerializer, GenreSeri
 from rest_framework import mixins, viewsets, generics
 from rest_framework.permissions import IsAuthenticated
 
+from authen.permissions import IsModerator
+
 import logging
 logger = logging.getLogger('api')
 
@@ -133,7 +135,7 @@ class OrderViewSet(viewsets.ModelViewSet,
                   mixins.UpdateModelMixin,
                   mixins.DestroyModelMixin):
 
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsModerator,)
     serializer_class = OrderSerializer
 
     def get_queryset(self):
